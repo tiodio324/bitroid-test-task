@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru" itemscope itemtype="https://schema.org/WebSite">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Культурный портал - афиша мероприятий, театры, музыка, выставки">
+    <meta name="keywords" content="афиша, мероприятия, театр, музыка, выставки, кино, фестивали, культура">
+    <meta name="author" content="Культурный портал">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Культурный портал - Афиша мероприятий">
+    <meta property="og:description" content="Актуальная афиша культурных мероприятий: театр, музыка, выставки, кино, фестивали">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    
+    <!-- Schema.org микроразметка -->
+    <meta itemprop="name" content="Культурный портал">
+    <meta itemprop="description" content="Актуальная афиша культурных мероприятий и событий">
+    <meta itemprop="url" content="">
+
+    <title>Культурный портал - Афиша мероприятий</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Bitrix Core -->
+    <script src="/bitrix/js/main/core/core.js"></script>
+    <script src="/bitrix/js/main/core/core_date.js"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body itemscope itemtype="https://schema.org/Organization">
+
+    <meta itemprop="name" content="Культурный портал">
+    <meta itemprop="logo" content="/images/logo.png">
+    <meta itemprop="url" content="">
+    <meta itemprop="telephone" content="+7 (XXX) XXX-XX-XX">
+    <meta itemprop="email" content="info@example.com">
+    
+
+    <div style="display: none;" itemprop="sameAs">
+        <a href="https://vk.com/example">VK</a>
+        <a href="https://t.me/example">Telegram</a>
+        <a href="https://ok.ru/example">OK</a>
+    </div>
+
+
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg" x-data="{ mobileMenuOpen: false }">
+                <div class="container-fluid">
+
+                    <a class="navbar-brand header__logo" href="/" itemprop="logo">
+                        <span class="header__logo-text">Логотип</span>
+                    </a>
+
+
+                    <button 
+                        class="navbar-toggler" 
+                        type="button"
+                        @click="mobileMenuOpen = !mobileMenuOpen"
+                        :aria-expanded="mobileMenuOpen"
+                        aria-controls="navbarNav"
+                        aria-label="Переключить навигацию"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+
+                    <div 
+                        class="collapse navbar-collapse" 
+                        id="navbarNav"
+                        :class="{ 'show': mobileMenuOpen }"
+                    >
+
+                        <ul class="navbar-nav me-auto header__menu">
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/theater">Театр</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/music">Музыка</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/exhibitions">Выставки</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/cinema">Кино</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/festivals">Фестивали и праздники</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/education">Образовательные мероприятия</a>
+                            </li>
+                        </ul>
+
+
+                        <ul class="navbar-nav header__menu">
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link_ext" href="/venues">
+                                    Учреждения
+                                    <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link_ext" href="/news">
+                                    Новости
+                                    <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+
+
+                        <form class="d-flex header__search" role="search" x-data="{ searchQuery: '' }">
+                            <input 
+                                class="form-control header__search-input" 
+                                type="search" 
+                                placeholder="Поиск по сайту" 
+                                aria-label="Поиск"
+                                x-model="searchQuery"
+                            >
+                            <button class="btn header__search-btn" type="submit">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="10.5" cy="10.5" r="7.5" stroke="#222222" stroke-width="2"/>
+                                    <path d="m21 21-5.197-5.197" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>

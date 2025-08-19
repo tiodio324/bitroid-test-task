@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ru" itemscope itemtype="https://schema.org/WebSite">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Культурный портал - афиша мероприятий, театры, музыка, выставки">
+    <meta name="keywords" content="афиша, мероприятия, театр, музыка, выставки, кино, фестивали, культура">
+    <meta name="author" content="Культурный портал">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Культурный портал - Афиша мероприятий">
+    <meta property="og:description" content="Актуальная афиша культурных мероприятий: театр, музыка, выставки, кино, фестивали">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    
+    <!-- Schema.org микроразметка -->
+    <meta itemprop="name" content="Культурный портал">
+    <meta itemprop="description" content="Актуальная афиша культурных мероприятий и событий">
+    <meta itemprop="url" content="">
+
+    <title>Культурный портал - Афиша мероприятий</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Bitrix Core -->
+    <script src="/bitrix/js/main/core/core.js"></script>
+    <script src="/bitrix/js/main/core/core_date.js"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body itemscope itemtype="https://schema.org/Organization">
+
+    <meta itemprop="name" content="Культурный портал">
+    <meta itemprop="logo" content="/images/logo.png">
+    <meta itemprop="url" content="">
+    <meta itemprop="telephone" content="+7 (XXX) XXX-XX-XX">
+    <meta itemprop="email" content="info@example.com">
+    
+
+    <div style="display: none;" itemprop="sameAs">
+        <a href="https://vk.com/example">VK</a>
+        <a href="https://t.me/example">Telegram</a>
+        <a href="https://ok.ru/example">OK</a>
+    </div>
+
+
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg" x-data="{ mobileMenuOpen: false }">
+                <div class="container-fluid">
+
+                    <a class="navbar-brand header__logo" href="/" itemprop="logo">
+                        <span class="header__logo-text">Логотип</span>
+                    </a>
+
+
+                    <button 
+                        class="navbar-toggler" 
+                        type="button"
+                        @click="mobileMenuOpen = !mobileMenuOpen"
+                        :aria-expanded="mobileMenuOpen"
+                        aria-controls="navbarNav"
+                        aria-label="Переключить навигацию"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+
+                    <div 
+                        class="collapse navbar-collapse" 
+                        id="navbarNav"
+                        :class="{ 'show': mobileMenuOpen }"
+                    >
+
+                        <ul class="navbar-nav me-auto header__menu">
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/theater">Театр</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/music">Музыка</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/exhibitions">Выставки</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/cinema">Кино</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/festivals">Фестивали и праздники</a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link" href="/education">Образовательные мероприятия</a>
+                            </li>
+                        </ul>
+
+
+                        <ul class="navbar-nav header__menu">
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link_ext" href="/venues">
+                                    Учреждения
+                                    <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="nav-item header__menu-item">
+                                <a class="nav-link header__menu-link_ext" href="/news">
+                                    Новости
+                                    <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+
+
+                        <form class="d-flex header__search" role="search" x-data="{ searchQuery: '' }">
+                            <input 
+                                class="form-control header__search-input" 
+                                type="search" 
+                                placeholder="Поиск по сайту" 
+                                aria-label="Поиск"
+                                x-model="searchQuery"
+                            >
+                            <button class="btn header__search-btn" type="submit">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="10.5" cy="10.5" r="7.5" stroke="#222222" stroke-width="2"/>
+                                    <path d="m21 21-5.197-5.197" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <section class="hero-featured-section">
+            <div class="container">
+                <div class="hero-featured-wrapper">
+
+                    <div class="hero-slider" x-data="{ currentSlide: 0 }">
+
+                        <div class="hero__content">
+                            <div class="hero__text-content">
+                                <h1 class="hero-title">Заголовок ближайшего мероприятия</h1>
+                                <div class="hero__date">12–15 сентября</div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Подробнее</a>
+                        </div>
+
+
+                        <div class="hero__placeholder">
+                            <svg width="213" height="213" viewBox="0 0 213 213" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M64.5036 41.3398C92.4516 38.9127 120.557 38.9127 148.505 41.3398L161.907 42.5113C168.136 43.0568 174.001 45.6815 178.558 49.9634C183.115 54.2453 186.1 59.9355 187.032 66.1188C191.057 92.8891 191.057 120.111 187.032 146.881C186.671 149.23 186.044 151.461 185.15 153.573C184.565 154.966 182.754 155.179 181.725 154.061L142.488 110.893C141.621 109.939 140.494 109.257 139.246 108.931C137.999 108.605 136.683 108.648 135.459 109.056L112.997 116.547L80.4165 79.8928C79.8138 79.2147 79.0789 78.667 78.2569 78.2833C77.4349 77.8996 76.5432 77.6879 75.6364 77.6613C74.7297 77.6347 73.827 77.7937 72.984 78.1286C72.1409 78.4635 71.3752 78.9672 70.7338 79.6088L27.1221 123.221C26.8258 123.525 26.4471 123.737 26.0324 123.829C25.6177 123.921 25.1851 123.891 24.7875 123.741C24.3899 123.591 24.0446 123.329 23.7941 122.986C23.5435 122.643 23.3985 122.234 23.3768 121.809C22.3273 103.203 23.1957 84.5383 25.9683 66.1099C26.9004 59.9266 29.885 54.2364 34.4421 49.9546C38.9993 45.6727 44.8641 43.0479 51.0935 42.5024L64.5036 41.3398ZM124.25 79.875C124.25 76.3443 125.653 72.9583 128.149 70.4617C130.646 67.9651 134.032 66.5625 137.563 66.5625C141.093 66.5625 144.479 67.9651 146.976 70.4617C149.473 72.9583 150.875 76.3443 150.875 79.875C150.875 83.4057 149.473 86.7918 146.976 89.2884C144.479 91.785 141.093 93.1875 137.563 93.1875C134.032 93.1875 130.646 91.785 128.149 89.2884C125.653 86.7918 124.25 83.4057 124.25 79.875Z" fill="#222222"/>
+                                <path d="M26.279 142.888C26.0393 143.13 25.8586 143.424 25.7508 143.747C25.6431 144.07 25.6112 144.414 25.6577 144.751L25.9683 146.881C26.9004 153.065 29.885 158.755 34.4421 163.037C38.9993 167.319 44.8641 169.943 51.0935 170.489L64.4947 171.651C92.451 174.083 120.549 174.083 148.505 171.651L161.907 170.489C165.583 170.178 169.16 169.131 172.424 167.409C173.639 166.779 173.844 165.173 172.921 164.161L136.533 124.135C136.244 123.813 135.868 123.583 135.45 123.473C135.032 123.363 134.591 123.377 134.181 123.513L113.041 130.56C111.805 130.973 110.475 131.014 109.216 130.678C107.957 130.342 106.825 129.643 105.959 128.67L76.7156 95.7701C76.5143 95.5441 76.2688 95.3616 75.9943 95.2339C75.7198 95.1062 75.4221 95.0361 75.1195 95.0278C74.8169 95.0194 74.5158 95.0731 74.2347 95.1856C73.9536 95.298 73.6985 95.4667 73.4851 95.6814L26.279 142.888Z" fill="#222222"/>
+                            </svg>
+                        </div>
+
+
+                        <div class="hero__navigation">
+                            <button class="hero__nav hero__nav--prev" @click="currentSlide = currentSlide > 0 ? currentSlide - 1 : 0">
+                                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5434 19.3484C10.913 20.0103 9.86528 20.0359 9.20333 19.4055L0.513671 11.1296C0.18565 10.8172 -2.08555e-06 10.384 -2.04595e-06 9.93103C-2.00635e-06 9.47805 0.18565 9.04486 0.513672 8.73246L9.20333 0.456598C9.86528 -0.173833 10.913 -0.14828 11.5434 0.513674C12.1738 1.17563 12.1483 2.22331 11.4863 2.85374L4.05517 9.93103L11.4863 17.0083C12.1483 17.6388 12.1738 18.6864 11.5434 19.3484Z" fill="#242424"/>
+                                </svg>
+                            </button>
+                            <button class="hero__nav hero__nav--next" @click="currentSlide = currentSlide + 1">
+                                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.456602 19.3484C1.08703 20.0103 2.13472 20.0359 2.79667 19.4055L11.4863 11.1296C11.8143 10.8172 12 10.384 12 9.93103C12 9.47805 11.8143 9.04486 11.4863 8.73246L2.79667 0.456598C2.13472 -0.173833 1.08703 -0.14828 0.456601 0.513674C-0.173831 1.17563 -0.148278 2.22331 0.513676 2.85374L7.94483 9.93103L0.513677 17.0083C-0.148277 17.6388 -0.17383 18.6864 0.456602 19.3484Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="featured-events">
+            <div class="container">
+                <h2 class="section-title">Рекомендуемые редакцией мероприятия</h2>
+                
+
+                <div class="featured-cards-container">
+
+                    <div class="featured-cards-row">
+                        <div class="card featured__card">
+                            <div class="featured__card-content">
+                                <div class="featured__card-img"></div>
+                                <div class="card-body featured__card-body">
+                                    <div class="featured__card-info">
+                                        <h5 class="card-title">Заголовок</h5>
+                                        <p class="card-date">6 сентября - 14:00</p>
+                                    </div>
+                                    <div class="featured__tags">
+                                        <span class="badge featured__tag">тег</span>
+                                        <span class="badge featured__tag">тег</span>
+                                        <span class="badge featured__tag">тег</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.475 1.475C0.79845 2.15155 0.79845 3.24845 1.475 3.925L17.05 19.5H3.75C2.7835 19.5 2 20.2835 2 21.25C2 22.2165 2.7835 23 3.75 23H21.25C22.2165 23 23 22.2165 23 21.25V3.75C23 2.7835 22.2165 2 21.25 2C20.2835 2 19.5 2.7835 19.5 3.75V17.05L3.925 1.475C3.24845 0.79845 2.15155 0.79845 1.475 1.475Z" fill="#242424"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="card featured__card">
+                            <div class="featured__card-content">
+                                <div class="featured__card-img"></div>
+                                <div class="card-body featured__card-body">
+                                    <div class="featured__card-info">
+                                        <h5 class="card-title">Заголовок</h5>
+                                        <p class="card-date">6 сентября - 14:00</p>
+                                    </div>
+                                    <div class="featured__tags">
+                                        <span class="badge featured__tag">тег</span>
+                                        <span class="badge featured__tag">тег</span>
+                                        <span class="badge featured__tag">тег</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.475 1.475C0.79845 2.15155 0.79845 3.24845 1.475 3.925L17.05 19.5H3.75C2.7835 19.5 2 20.2835 2 21.25C2 22.2165 2.7835 23 3.75 23H21.25C22.2165 23 23 22.2165 23 21.25V3.75C23 2.7835 22.2165 2 21.25 2C20.2835 2 19.5 2.7835 19.5 3.75V17.05L3.925 1.475C3.24845 0.79845 2.15155 0.79845 1.475 1.475Z" fill="#242424"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+
+                    <div class="featured-cards-row">
+                        <div class="card featured__card">
+                            <div class="featured__card-content">
+                                <div class="featured__card-img"></div>
+                                <div class="card-body featured__card-body">
+                                    <div class="featured__card-info">
+                                        <h5 class="card-title">Заголовок</h5>
+                                        <p class="card-date">6 сентября - 14:00</p>
+                                    </div>
+                                    <div class="featured__tags">
+                                        <span class="badge featured__tag">тег</span>
+                                        <span class="badge featured__tag">тег</span>
+                                        <span class="badge featured__tag">тег</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.475 1.475C0.79845 2.15155 0.79845 3.24845 1.475 3.925L17.05 19.5H3.75C2.7835 19.5 2 20.2835 2 21.25C2 22.2165 2.7835 23 3.75 23H21.25C22.2165 23 23 22.2165 23 21.25V3.75C23 2.7835 22.2165 2 21.25 2C20.2835 2 19.5 2.7835 19.5 3.75V17.05L3.925 1.475C3.24845 0.79845 2.15155 0.79845 1.475 1.475Z" fill="#242424"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="card featured__card">
+                            <div class="featured__card-content">
+                                <div class="featured__card-img"></div>
+                                <div class="card-body featured__card-body">
+                                    <div class="featured__card-info">
+                                        <h5 class="card-title">Заголовок</h5>
+                                        <p class="card-date">6 сентября - 14:00</p>
+                                    </div>
+                                    <div class="featured__tags">
+                                        <span class="badge featured__tag">тег</span>
+                                        <span class="badge featured__tag">тег</span>
+                                        <span class="badge featured__tag">тег</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.475 1.475C0.79845 2.15155 0.79845 3.24845 1.475 3.925L17.05 19.5H3.75C2.7835 19.5 2 20.2835 2 21.25C2 22.2165 2.7835 23 3.75 23H21.25C22.2165 23 23 22.2165 23 21.25V3.75C23 2.7835 22.2165 2 21.25 2C20.2835 2 19.5 2.7835 19.5 3.75V17.05L3.925 1.475C3.24845 0.79845 2.15155 0.79845 1.475 1.475Z" fill="#242424"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <nav aria-label="Пагинация рекомендуемых мероприятий" class="d-flex justify-content-center mt-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="hero__nav hero__nav--prev">
+                            <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5434 19.3484C10.913 20.0103 9.86528 20.0359 9.20333 19.4055L0.513671 11.1296C0.18565 10.8172 -2.08555e-06 10.384 -2.04595e-06 9.93103C-2.00635e-06 9.47805 0.18565 9.04486 0.513672 8.73246L9.20333 0.456598C9.86528 -0.173833 10.913 -0.14828 11.5434 0.513674C12.1738 1.17563 12.1483 2.22331 11.4863 2.85374L4.05517 9.93103L11.4863 17.0083C12.1483 17.6388 12.1738 18.6864 11.5434 19.3484Z" fill="white"/>
+                            </svg>
+                        </button>
+                        <div class="d-flex align-items-center gap-4">
+                            <span class="text-large fw-bold">1</span>
+                            <span class="page-link">2</span>
+                            <span class="text-large">3</span>
+                            <span class="text-large">4</span>
+                            <span class="text-large">...</span>
+                            <span class="text-large">108</span>
+                        </div>
+                        <button class="hero__nav hero__nav--next">
+                            <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.456602 19.3484C1.08703 20.0103 2.13472 20.0359 2.79667 19.4055L11.4863 11.1296C11.8143 10.8172 12 10.384 12 9.93103C12 9.47805 11.8143 9.04486 11.4863 8.73246L2.79667 0.456598C2.13472 -0.173833 1.08703 -0.14828 0.456601 0.513674C-0.173831 1.17563 -0.148278 2.22331 0.513676 2.85374L7.94483 9.93103L0.513677 17.0083C-0.148277 17.6388 -0.17383 18.6864 0.456602 19.3484Z" fill="white"/>
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="filters-events-section">
+            <div class="container">
+                <div class="filters-events-wrapper">
+
+                    <div class="filters-sidebar">
+
+                        <div class="filters__block mb-4">
+                            <h3 class="filters__title">Дата</h3>
+                            <div class="calendar-container">
+    
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div class="dropdown">
+                                        <button class="btn sort-dropdown" type="button" data-bs-toggle="dropdown">
+                                            Август
+                                            <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+                                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" fill="none"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn sort-dropdown" type="button" data-bs-toggle="dropdown">
+                                            2025
+                                            <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+                                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" fill="none"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="calendar-grid">
+                                    <div class="calendar-header">
+                                        <div class="calendar-day-name">пн</div>
+                                        <div class="calendar-day-name">вт</div>
+                                        <div class="calendar-day-name">ср</div>
+                                        <div class="calendar-day-name">чт</div>
+                                        <div class="calendar-day-name">пт</div>
+                                        <div class="calendar-day-name">сб</div>
+                                        <div class="calendar-day-name">вс</div>
+                                    </div>
+                                    <div class="calendar-body">
+                                        <div class="calendar-day calendar-day--prev">28</div>
+                                        <div class="calendar-day calendar-day--prev">29</div>
+                                        <div class="calendar-day calendar-day--prev">30</div>
+                                        <div class="calendar-day calendar-day--prev">31</div>
+                                        <div class="calendar-day">01</div>
+                                        <div class="calendar-day calendar-day--weekend">02</div>
+                                        <div class="calendar-day calendar-day--weekend">03</div>
+                                        <div class="calendar-day">04</div>
+                                        <div class="calendar-day">05</div>
+                                        <div class="calendar-day calendar-day--active">06</div>
+                                        <div class="calendar-day calendar-day--selected">07</div>
+                                        <div class="calendar-day calendar-day--selected">08</div>
+                                        <div class="calendar-day calendar-day--weekend">09</div>
+                                        <div class="calendar-day calendar-day--weekend">10</div>
+                                        <div class="calendar-day calendar-day--selected">11</div>
+                                        <div class="calendar-day calendar-day--active">12</div>
+                                        <div class="calendar-day">13</div>
+                                        <div class="calendar-day">14</div>
+                                        <div class="calendar-day">15</div>
+                                        <div class="calendar-day calendar-day--weekend">16</div>
+                                        <div class="calendar-day calendar-day--weekend">17</div>
+                                        <div class="calendar-day">18</div>
+                                        <div class="calendar-day">19</div>
+                                        <div class="calendar-day">20</div>
+                                        <div class="calendar-day">21</div>
+                                        <div class="calendar-day">22</div>
+                                        <div class="calendar-day calendar-day--weekend">23</div>
+                                        <div class="calendar-day calendar-day--weekend">24</div>
+                                        <div class="calendar-day">25</div>
+                                        <div class="calendar-day">26</div>
+                                        <div class="calendar-day">27</div>
+                                        <div class="calendar-day">28</div>
+                                        <div class="calendar-day">29</div>
+                                        <div class="calendar-day calendar-day--weekend">30</div>
+                                        <div class="calendar-day calendar-day--weekend">31</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="filters__block mb-4">
+                            <h3 class="filters__title">Учреждения</h3>
+                            <div class="filters__checkbox-group">
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="venue1" class="filters__checkbox" checked>
+                                    <label for="venue1" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="venue2" class="filters__checkbox">
+                                    <label for="venue2" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="venue3" class="filters__checkbox">
+                                    <label for="venue3" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="venue4" class="filters__checkbox" checked>
+                                    <label for="venue4" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="venue5" class="filters__checkbox">
+                                    <label for="venue5" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="venue6" class="filters__checkbox">
+                                    <label for="venue6" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                            </div>
+                            <a href="#" class="filters__more-btn">Ещё</a>
+                        </div>
+
+
+                        <div class="filters__block mb-4">
+                            <h3 class="filters__title">Категории</h3>
+                            <div class="filters__checkbox-group">
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="cat1" class="filters__checkbox" checked>
+                                    <label for="cat1" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="cat2" class="filters__checkbox">
+                                    <label for="cat2" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="cat3" class="filters__checkbox">
+                                    <label for="cat3" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="cat4" class="filters__checkbox">
+                                    <label for="cat4" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="cat5" class="filters__checkbox">
+                                    <label for="cat5" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                                <div class="filters__checkbox-item">
+                                    <input type="checkbox" id="cat6" class="filters__checkbox">
+                                    <label for="cat6" class="filters__checkbox-label">Пункт категории</label>
+                                </div>
+                            </div>
+                            <a href="#" class="filters__more-btn">Ещё</a>
+                        </div>
+                    </div>
+
+
+                    <div class="events-content">
+
+                        <div class="active-filters">
+                            <div class="active-filters__list">
+                                <a href="#" class="active-filters__tag">
+                                    Выбранный пункт фильтра
+                                    <span class="active-filters__tag-remove">✕</span>
+                                </a>
+                                <a href="#" class="active-filters__tag">
+                                    Выбранный пункт фильтра
+                                    <span class="active-filters__tag-remove">✕</span>
+                                </a>
+                                <a href="#" class="active-filters__tag">
+                                    Выбранный пункт фильтра
+                                    <span class="active-filters__tag-remove">✕</span>
+                                </a>
+                                <a href="#" class="active-filters__reset">Сбросить фильтр</a>
+                            </div>
+                            <div class="d-flex justify-content-end mt-4">
+                                <button class="btn sort-dropdown" type="button" data-bs-toggle="dropdown">
+                                    Сортировать
+                                    <svg width="12" height="10" viewBox="0 0 12 10" fill="currentColor">
+                                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div class="events__list">
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                    <div class="card events__card">
+                                        <div class="events__card-content">
+                                            <div class="events__card-img"></div>
+                                            <div class="card-body events__card-body">
+                                                <div class="events__card-info">
+                                                    <h5 class="card-title events__card-title">Заголовок</h5>
+                                                    <p class="card-date events__card-date">6 сентября - 14:00</p>
+                                                </div>
+                                                <div class="featured__tags">
+                                                    <span class="badge featured__tag">тег</span>
+                                                    <span class="badge featured__tag">тег</span>
+                                                    <span class="badge featured__tag">тег</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.125 1.125C-0.00258255 2.25258 -0.00258255 4.08075 1.125 5.20833L27.0833 31.1667H4.91667C3.30584 31.1667 2 32.4725 2 34.0833C2 35.6942 3.30584 37 4.91666 37H34.0833C35.6942 37 37 35.6942 37 34.0833V4.91667C37 3.30584 35.6942 2 34.0833 2C32.4725 2 31.1667 3.30584 31.1667 4.91666V27.0833L5.20833 1.125C4.08075 -0.00258636 2.25258 -0.00258255 1.125 1.125Z" fill="#242424"/>
+                                            </svg>                                                
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <div class="card events__card">
+                                        <div class="events__card-content">
+                                            <div class="events__card-img"></div>
+                                            <div class="card-body events__card-body">
+                                                <div class="events__card-info">
+                                                    <h5 class="card-title events__card-title">Заголовок</h5>
+                                                    <p class="card-date events__card-date">6 сентября - 14:00</p>
+                                                </div>
+                                                <div class="featured__tags">
+                                                    <span class="badge featured__tag">тег</span>
+                                                    <span class="badge featured__tag">тег</span>
+                                                    <span class="badge featured__tag">тег</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.125 1.125C-0.00258255 2.25258 -0.00258255 4.08075 1.125 5.20833L27.0833 31.1667H4.91667C3.30584 31.1667 2 32.4725 2 34.0833C2 35.6942 3.30584 37 4.91666 37H34.0833C35.6942 37 37 35.6942 37 34.0833V4.91667C37 3.30584 35.6942 2 34.0833 2C32.4725 2 31.1667 3.30584 31.1667 4.91666V27.0833L5.20833 1.125C4.08075 -0.00258636 2.25258 -0.00258255 1.125 1.125Z" fill="#242424"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <div class="card events__card">
+                                        <div class="events__card-content">
+                                            <div class="events__card-img"></div>
+                                            <div class="card-body events__card-body">
+                                                <div class="events__card-info">
+                                                    <h5 class="card-title events__card-title">Заголовок</h5>
+                                                    <p class="card-date events__card-date">6 сентября - 14:00</p>
+                                                </div>
+                                                <div class="featured__tags">
+                                                    <span class="badge featured__tag">тег</span>
+                                                    <span class="badge featured__tag">тег</span>
+                                                    <span class="badge featured__tag">тег</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.125 1.125C-0.00258255 2.25258 -0.00258255 4.08075 1.125 5.20833L27.0833 31.1667H4.91667C3.30584 31.1667 2 32.4725 2 34.0833C2 35.6942 3.30584 37 4.91666 37H34.0833C35.6942 37 37 35.6942 37 34.0833V4.91667C37 3.30584 35.6942 2 34.0833 2C32.4725 2 31.1667 3.30584 31.1667 4.91666V27.0833L5.20833 1.125C4.08075 -0.00258636 2.25258 -0.00258255 1.125 1.125Z" fill="#242424"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <nav aria-label="Пагинация мероприятий" class="d-flex justify-content-start mt-4">
+                                <div class="d-flex align-items-center gap-3">
+                                    <button class="hero__nav hero__nav--prev">
+                                        <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5434 19.3484C10.913 20.0103 9.86528 20.0359 9.20333 19.4055L0.513671 11.1296C0.18565 10.8172 -2.08555e-06 10.384 -2.04595e-06 9.93103C-2.00635e-06 9.47805 0.18565 9.04486 0.513672 8.73246L9.20333 0.456598C9.86528 -0.173833 10.913 -0.14828 11.5434 0.513674C12.1738 1.17563 12.1483 2.22331 11.4863 2.85374L4.05517 9.93103L11.4863 17.0083C12.1483 17.6388 12.1738 18.6864 11.5434 19.3484Z" fill="white"/>
+                                        </svg>
+                                    </button>
+                                    <div class="d-flex align-items-center gap-4">
+                                        <span class="text-large fw-bold">1</span>
+                                        <span class="page-link">2</span>
+                                        <span class="text-large">3</span>
+                                        <span class="text-large">4</span>
+                                        <span class="text-large">...</span>
+                                        <span class="text-large">108</span>
+                                    </div>
+                                    <button class="hero__nav hero__nav--next">
+                                        <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.456602 19.3484C1.08703 20.0103 2.13472 20.0359 2.79667 19.4055L11.4863 11.1296C11.8143 10.8172 12 10.384 12 9.93103C12 9.47805 11.8143 9.04486 11.4863 8.73246L2.79667 0.456598C2.13472 -0.173833 1.08703 -0.14828 0.456601 0.513674C-0.173831 1.17563 -0.148278 2.22331 0.513676 2.85374L7.94483 9.93103L0.513677 17.0083C-0.148277 17.6388 -0.17383 18.6864 0.456602 19.3484Z" fill="white"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </nav>
+
+
+                            <div class="tags mt-5">
+                                <div class="tags__cloud">
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="badge tags__tag">тег</a>
+                                    <a href="#" class="tags__all-btn">Все теги</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="tags-news-section">
+            <div class="container">
+                <div class="tags-news-wrapper">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="news">
+
+                                <div class="news__filter-tabs">
+                                    <a href="#" class="news__filter-tab news__filter-tab--active">Новости</a>
+                                    <a href="#" class="news__filter-tab">Авторские статьи</a>
+                                    <a href="#" class="news__filter-tab">Меры поддержки</a>
+                                </div>
+
+                                <h2 class="section-title">Новости</h2>
+                                
+
+                                <div class="row mb-4">
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <article class="card news__card">
+                                            <div class="news__card-img"></div>
+                                            <div class="card-body news__card-body">
+                                                <h5 class="card-title news__card-title">Заголовок</h5>
+                                                <p class="card-text news__card-excerpt">Краткое описание</p>
+                                                <a href="#" class="btn btn-link news__card-link">Читать подробнее</a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <article class="card news__card">
+                                            <div class="news__card-img"></div>
+                                            <div class="card-body news__card-body">
+                                                <h5 class="card-title news__card-title">Заголовок</h5>
+                                                <p class="card-text news__card-excerpt">Краткое описание</p>
+                                                <a href="#" class="btn btn-link news__card-link">Читать подробнее</a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <article class="card news__card">
+                                            <div class="news__card-img"></div>
+                                            <div class="card-body news__card-body">
+                                                <h5 class="card-title news__card-title">Заголовок</h5>
+                                                <p class="card-text news__card-excerpt">Краткое описание</p>
+                                                <a href="#" class="btn btn-link news__card-link">Читать подробнее</a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+
+
+                                <nav aria-label="Пагинация новостей" class="d-flex justify-content-start">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <button class="hero__nav hero__nav--prev">
+                                            <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5434 19.3484C10.913 20.0103 9.86528 20.0359 9.20333 19.4055L0.513671 11.1296C0.18565 10.8172 -2.08555e-06 10.384 -2.04595e-06 9.93103C-2.00635e-06 9.47805 0.18565 9.04486 0.513672 8.73246L9.20333 0.456598C9.86528 -0.173833 10.913 -0.14828 11.5434 0.513674C12.1738 1.17563 12.1483 2.22331 11.4863 2.85374L4.05517 9.93103L11.4863 17.0083C12.1483 17.6388 12.1738 18.6864 11.5434 19.3484Z" fill="white"/>
+                                            </svg>
+                                        </button>
+                                        <div class="d-flex align-items-center gap-4">
+                                            <span class="text-large fw-bold">1</span>
+                                            <span class="page-link">2</span>
+                                            <span class="text-large">3</span>
+                                            <span class="text-large">4</span>
+                                            <span class="text-large">...</span>
+                                            <span class="text-large">108</span>
+                                        </div>
+                                        <button class="hero__nav hero__nav--next">
+                                            <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.456602 19.3484C1.08703 20.0103 2.13472 20.0359 2.79667 19.4055L11.4863 11.1296C11.8143 10.8172 12 10.384 12 9.93103C12 9.47805 11.8143 9.04486 11.4863 8.73246L2.79667 0.456598C2.13472 -0.173833 1.08703 -0.14828 0.456601 0.513674C-0.173831 1.17563 -0.148278 2.22331 0.513676 2.85374L7.94483 9.93103L0.513677 17.0083C-0.148277 17.6388 -0.17383 18.6864 0.456602 19.3484Z" fill="white"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="footer" itemprop="contactPoint">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-start mb-4">
+
+                <div class="footer__logo-container">
+                    <span class="footer__logo">Логотип</span>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-between align-items-end">
+
+                <div class="footer__contacts">
+                    <p class="mb-1" itemprop="email">test@mail.ru</p>
+                    <p class="mb-0" itemprop="telephone">+7 900 444 55 88</p>
+                </div>
+
+
+                <div class="footer__social">
+                    <a href="https://vk.com/example" class="footer__social-link" itemprop="sameAs">
+                        <svg width="24" height="17" viewBox="0 0 24 17" fill="currentColor">
+                            <path d="M23.45 1.48c.16-.54 0-.93-.77-.93h-2.54c-.65 0-.95.34-1.11.72 0 0-1.3 3.17-3.14 5.23-.6.6-.87.78-1.19.78-.16 0-.4-.18-.4-.72V1.48c0-.65-.19-.93-.73-.93H9.24c-.41 0-.65.3-.65.59 0 .62.92.76 1.02 2.5v3.78c0 .83-.15.98-.47.98-.87 0-2.98-3.18-4.23-6.82C4.69.35 4.47 0 3.82 0H1.28C.56 0 .42.34.42.72c0 .67.87 4.04 4.05 8.49C6.8 12.68 9.42 14 11.8 14c1.34 0 1.51-.36 1.51-.98v-2.27c0-.72.15-.86.66-.86.37 0 1.01.18 2.5 1.59 1.7 1.7 1.98 2.46 2.94 2.46h2.54c.72 0 1.08-.36.87-1.07-.23-.7-1.04-1.72-2.12-2.93-.6-.69-1.49-1.44-1.76-1.81-.37-.48-.27-.69 0-1.11 0 0 3.11-4.38 3.44-5.87z"/>
+                        </svg>
+                    </a>
+                    <a href="https://t.me/example" class="footer__social-link" itemprop="sameAs">
+                        <svg width="24" height="20" viewBox="0 0 24 20" fill="currentColor">
+                            <path d="M9.417 15.181l-.397 5.584c.568 0 .814-.244 1.109-.537l2.663-2.545 5.518 4.041c1.012.564 1.725.267 1.998-.931L23.93 3.821l.001-.001c.321-1.496-.541-2.081-1.527-1.714l-21.29 8.151c-1.453.564-1.431 1.374-.247 1.741l5.443 1.693L18.953 5.78c.595-.394 1.136-.176.691.218z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="footer__bottom-right">
+                    <p class="footer__text mb-2">Облако тегов</p>
+                    <p class="footer__text mb-2">SEO-текст с кратким описанием сайта</p>
+                    <p class="footer__copyright">©Все права защищены, 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Обработчик выбора даты для календаря Bitrix
+        function dateChanged(selectedDate) {
+            console.log('Выбрана дата:', selectedDate);
+            // Здесь можно добавить логику фильтрации мероприятий по дате
+        }
+    </script>
+</body>
+</html>
